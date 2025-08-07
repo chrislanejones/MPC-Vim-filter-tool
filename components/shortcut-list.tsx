@@ -1619,7 +1619,7 @@ export function ShortcutList({
             className="bg-[var(--card)] shadow-sm hover:shadow-md transition-shadow duration-300"
           >
             <CardHeader className="pb-2">
-              <CardTitle className="text-xl font-semibold text-[var(--card-foreground)]">
+              <CardTitle className="text-xl font-semibold text-[var(--card-foreground)] ">
                 {shortcut.description}
               </CardTitle>
             </CardHeader>

@@ -68,10 +68,13 @@ export function ShortcutFilters({
   // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (
-        event.target &&
-        (event.target as HTMLElement).closest(".shortcut-filters")
-      ) {
+      // Check if we're in the shortcut filters area or if a button is focused
+      const target = event.target as HTMLElement;
+      const isInFilters =
+        target.closest(".shortcut-filters") ||
+        buttonRefs.current.includes(target as HTMLButtonElement);
+
+      if (isInFilters && focusedIndex >= 0) {
         const currentIndex = focusedIndex;
         let newIndex = currentIndex;
 
@@ -98,19 +101,23 @@ export function ShortcutFilters({
             break;
           case "ArrowDown":
             event.preventDefault();
-            // Move down by 4 (one row in 4-column grid)
+            // Move down by 4 (one row in 4-column grid) or to end if near bottom
+            const cols =
+              window.innerWidth >= 1024 ? 4 : window.innerWidth >= 640 ? 3 : 2;
             newIndex =
-              currentIndex + 4 >= filters.length
-                ? (currentIndex + 4) % filters.length
-                : currentIndex + 4;
+              currentIndex + cols >= filters.length
+                ? (currentIndex + cols) % filters.length
+                : currentIndex + cols;
             break;
           case "ArrowUp":
             event.preventDefault();
-            // Move up by 4 (one row in 4-column grid)
+            // Move up by 4 (one row in 4-column grid) or wrap to end
+            const colsUp =
+              window.innerWidth >= 1024 ? 4 : window.innerWidth >= 640 ? 3 : 2;
             newIndex =
-              currentIndex - 4 < 0
-                ? filters.length + (currentIndex - 4)
-                : currentIndex - 4;
+              currentIndex - colsUp < 0
+                ? filters.length + (currentIndex - colsUp)
+                : currentIndex - colsUp;
             break;
           case "Enter":
           case " ":
@@ -125,6 +132,8 @@ export function ShortcutFilters({
             event.preventDefault();
             setActiveFilter(null);
             setFocusedIndex(-1);
+            // Focus back to container
+            document.querySelector(".shortcut-filters")?.focus();
             break;
           default:
             return;
@@ -148,7 +157,14 @@ export function ShortcutFilters({
   return (
     <div
       className="shortcut-filters grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 p-4 rounded-lg bg-[var(--muted)] shadow-inner transition-colors duration-300"
-      tabIndex={-1}
+      tabIndex={0}
+      onClick={() => {
+        // Initiate keyboard navigation when container is clicked
+        if (focusedIndex === -1) {
+          setFocusedIndex(0);
+          buttonRefs.current[0]?.focus();
+        }
+      }}
     >
       {filters.map((filter, index) => {
         const isActive = activeFilter === filter.name;
@@ -175,17 +191,41 @@ export function ShortcutFilters({
               }, 0);
             }}
             className={cn(
-              "flex flex-col items-center justify-center aspect-square w-full h-auto p-4 rounded-lg transition-all duration-200",
+              "flex flex-col items-center justify-start w-full h-32 p-4 rounded-lg transition-all duration-200",
               "bg-[var(--secondary)] text-[var(--secondary-foreground)] hover:bg-[var(--secondary)]/90",
               isActive &&
-                "bg-[var(--primary)] text-[var(--primary-foreground)] hover:bg-[var(--primary)]/90 shadow-lg scale-105",
+                "bg-red-200 text-red-800 hover:bg-red-300 shadow-lg scale-105 dark:bg-red-900 dark:text-white dark:hover:bg-red-800",
               isFocused && "ring-2 ring-[var(--ring)] ring-offset-2"
             )}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "flex-start",
+            }}
           >
-            <filter.icon className="size-8 mb-2 transition-all duration-200" />
-            <span className="text-lg font-semibold transition-all duration-200 text-center">
+            <filter.icon
+              className={cn(
+                "size-8 mb-2 flex-shrink-0 transition-all duration-200",
+                isActive && "text-orange-600 dark:text-orange-300"
+              )}
+            />
+            <div
+              className="text-sm font-semibold text-center leading-tight px-2 flex-1 flex items-center justify-center w-full"
+              style={{
+                wordWrap: "break-word",
+                wordBreak: "break-word",
+                overflowWrap: "break-word",
+                hyphens: "auto",
+                whiteSpace: "normal",
+                textAlign: "center",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               {filter.label}
-            </span>
+            </div>
             <span className="sr-only">Filter by {filter.label}</span>
           </Button>
         );

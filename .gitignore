@@ -40,18 +40,6 @@ yarn-error.log*
 # TypeScript
 *.tsbuildinfo
 
-# Next.js specific files
-next.config.js
-next.config.mjs
-next.config.ts
-
-# IDE/Editor files
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
 # OS generated files
 Thumbs.db
 ehthumbs.db
@@ -100,8 +88,11 @@ pids
 tmp/
 temp/
 
-# Editor directories and files
+# Editor directories and files (keep .vscode for project settings)
+!.vscode/
 .vscode/*
+!.vscode/settings.json
+!.vscode/css_custom_data.json
 !.vscode/extensions.json
 .idea
 *.suo

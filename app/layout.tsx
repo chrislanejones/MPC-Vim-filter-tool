@@ -1,19 +1,19 @@
-import type { Metadata } from 'next'
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
-import './globals.css'
-import { ThemeProvider } from '@/components/theme-provider'
+import type { Metadata } from "next";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+import "../styles/globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
-  title: 'Vim Shortcut Tool',
-  description: 'A tool to display and filter Vim shortcuts',
-    generator: 'v0.dev'
-}
+  title: "Vim Shortcut Tool",
+  description: "A tool to display and filter Vim shortcuts",
+  generator: "v0.dev",
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -37,5 +37,5 @@ html {
         </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }

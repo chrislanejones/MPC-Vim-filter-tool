@@ -21,32 +21,30 @@ export function ModeToggle() {
         <Button
           variant="outline"
           size="icon"
-          className="bg-[var(--accent)] border-[var(--border)] text-[var(--accent-foreground)] hover:bg-[var(--accent)]/90 hover:text-[var(--accent-foreground)] dark:bg-orange-900 dark:text-white dark:hover:bg-orange-800 dark:border-orange-700"
+          className="bg-accent border-border text-accent-foreground hover:bg-accent/90 hover:text-accent-foreground"
+          data-slot="dropdown-menu-trigger"
         >
           <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
           <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent
-        align="end"
-        className="bg-[var(--popover)] border-[var(--border)] dark:bg-orange-900 dark:border-orange-700"
-      >
+      <DropdownMenuContent align="end" className="bg-popover border-border">
         <DropdownMenuItem
           onClick={() => setTheme("light")}
-          className="text-[var(--popover-foreground)] hover:bg-[var(--accent)] hover:text-[var(--accent-foreground)] focus:bg-[var(--accent)] focus:text-[var(--accent-foreground)] dark:bg-orange-900 dark:border-orange-700"
+          className="text-popover-foreground hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
         >
           Light
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => setTheme("dark")}
-          className="text-[var(--popover-foreground)] hover:bg-[var(--accent)] hover:text-[var(--accent-foreground)] focus:bg-[var(--accent)] focus:text-[var(--accent-foreground)] dark:bg-orange-900 dark:border-orange-700"
+          className="text-popover-foreground hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
         >
           Dark
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => setTheme("system")}
-          className="text-[var(--popover-foreground)] hover:bg-[var(--accent)] hover:text-[var(--accent-foreground)] focus:bg-[var(--accent)] focus:text-[var(--accent-foreground)] dark:bg-orange-900 dark:border-orange-700"
+          className="text-popover-foreground hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
         >
           System
         </DropdownMenuItem>

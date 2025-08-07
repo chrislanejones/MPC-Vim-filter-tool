@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Light theme - Classic MPC charcoal/silver */
+  /* Light theme - Classic MPC charcoal/silver with red accents */
   --background: oklch(92% 0.005 280); /* Very light cool gray */
   --foreground: oklch(15% 0.02 270); /* Deep charcoal */
   --card: oklch(96% 0.003 280); /* Almost white with cool tint */
@@ -17,14 +17,14 @@
   --secondary-foreground: oklch(20% 0.02 270);
   --muted: oklch(88% 0.008 280); /* Muted silver */
   --muted-foreground: oklch(45% 0.015 270);
-  --accent: oklch(65% 0.25 25); /* MPC red/amber accent */
-  --accent-foreground: oklch(100% 0 0); /* White text */
-  --destructive: oklch(60% 0.22 15); /* Red for destructive actions */
+  --accent: oklch(35% 0.25 15); /* Dark red accent - FOR ACTIVE STATES */
+  --accent-foreground: oklch(100% 0 0); /* White text on red */
+  --destructive: oklch(40% 0.22 15); /* Dark red for destructive actions */
   --destructive-foreground: oklch(95% 0.005 280);
   --border: oklch(75% 0.01 280); /* More defined border */
   --input: oklch(85% 0.01 280);
-  --ring: oklch(65% 0.25 25); /* Red focus ring */
-  --chart-1: oklch(65% 0.25 25); /* MPC red */
+  --ring: oklch(35% 0.25 15); /* Dark red focus ring */
+  --chart-1: oklch(35% 0.25 15); /* Dark MPC red */
   --chart-2: oklch(55% 0.18 120); /* Green */
   --chart-3: oklch(60% 0.2 220); /* Blue */
   --chart-4: oklch(70% 0.15 300); /* Purple */
@@ -37,13 +37,13 @@
   --sidebar-accent: oklch(85% 0.01 280);
   --sidebar-accent-foreground: oklch(20% 0.02 270);
   --sidebar-border: oklch(75% 0.01 280);
-  --sidebar-ring: oklch(65% 0.25 25);
+  --sidebar-ring: oklch(35% 0.25 15);
 
-  /* MPC-specific variables - changed to red */
+  /* MPC-specific variables - red theme */
   --mpc-metal: oklch(82% 0.008 280);
   --mpc-dark-metal: oklch(25% 0.02 270);
-  --mpc-red: oklch(68% 0.28 15); /* Changed from orange to red */
-  --mpc-red-glow: oklch(68% 0.28 15 / 0.3);
+  --mpc-red: oklch(45% 0.28 15); /* Dark red accent color */
+  --mpc-red-glow: oklch(45% 0.28 15 / 0.3);
   --mpc-bezel: oklch(30% 0.015 270);
   --mpc-screen: oklch(8% 0.02 270);
 }
@@ -62,32 +62,32 @@
   --secondary-foreground: oklch(85% 0.015 25);
   --muted: oklch(15% 0.015 270); /* Darker muted */
   --muted-foreground: oklch(65% 0.01 25);
-  --accent: oklch(39.6% 0.141 15); /* Red-900 equivalent */
-  --accent-foreground: oklch(100% 0 0); /* White text */
-  --destructive: oklch(65% 0.25 15); /* Bright red */
+  --accent: oklch(45% 0.25 15); /* Dark red for dark mode - FOR ACTIVE STATES */
+  --accent-foreground: oklch(100% 0 0); /* White text on red */
+  --destructive: oklch(50% 0.25 15); /* Dark red */
   --destructive-foreground: oklch(88% 0.015 25);
   --border: oklch(25% 0.02 270); /* More defined dark border */
   --input: oklch(15% 0.015 270);
-  --ring: oklch(75% 0.28 15); /* Bright red focus */
-  --chart-1: oklch(75% 0.28 15); /* Bright MPC red */
+  --ring: oklch(55% 0.28 15); /* Dark red focus */
+  --chart-1: oklch(55% 0.28 15); /* Dark MPC red */
   --chart-2: oklch(70% 0.2 140); /* Bright green */
   --chart-3: oklch(65% 0.22 230); /* Bright blue */
   --chart-4: oklch(75% 0.18 310); /* Bright purple */
   --chart-5: oklch(80% 0.2 70); /* Bright yellow */
   --sidebar: oklch(10% 0.01 270);
   --sidebar-foreground: oklch(85% 0.015 25);
-  --sidebar-primary: oklch(75% 0.28 15);
+  --sidebar-primary: oklch(55% 0.28 15);
   --sidebar-primary-foreground: oklch(8% 0.01 270);
   --sidebar-accent: oklch(18% 0.02 270);
   --sidebar-accent-foreground: oklch(85% 0.015 25);
   --sidebar-border: oklch(25% 0.02 270);
-  --sidebar-ring: oklch(75% 0.28 15);
+  --sidebar-ring: oklch(55% 0.28 15);
 
-  /* Dark MPC-specific variables - changed to red */
+  /* Dark MPC-specific variables - red theme */
   --mpc-metal: oklch(15% 0.015 270);
   --mpc-dark-metal: oklch(8% 0.01 270);
-  --mpc-red: oklch(78% 0.32 15); /* Changed from orange to red */
-  --mpc-red-glow: oklch(78% 0.32 15 / 0.4);
+  --mpc-red: oklch(58% 0.32 15); /* Dark red accent color */
+  --mpc-red-glow: oklch(58% 0.32 15 / 0.4);
   --mpc-bezel: oklch(12% 0.015 270);
   --mpc-screen: oklch(5% 0.01 270);
 }
@@ -189,28 +189,12 @@
     text-shadow: 0 0 8px var(--mpc-red-glow);
   }
 
-  /* Enhanced Active State Glow */
-  [data-state="active"],
-  .active,
-  [data-active="true"] {
-    box-shadow: 0 0 15px var(--mpc-red-glow), 0 0 30px var(--mpc-red-glow),
-      inset 0 1px 0 oklch(var(--mpc-red) / 0.3);
-    border-color: var(--mpc-red);
-  }
-
-  /* Dark theme glow enhancement */
-  .dark [data-state="active"],
-  .dark .active,
-  .dark [data-active="true"] {
-    box-shadow: 0 0 20px var(--mpc-red-glow), 0 0 40px var(--mpc-red-glow),
-      0 0 60px oklch(var(--mpc-red) / 0.1),
-      inset 0 1px 0 oklch(var(--mpc-red) / 0.4);
-  }
+  /* Remove any global red overrides */
 }
 
 /* Enhanced MPC-style Pad Grid */
 .shortcut-filters {
-  background: var(--mpc-metal);
+  background: var(--muted);
   border: 3px solid var(--mpc-dark-metal);
   border-radius: 12px;
   padding: 20px;
@@ -279,18 +263,19 @@
   );
 }
 
+/* ONLY ACTIVE BUTTONS GET RED BACKGROUND */
 .shortcut-filters button:active,
 .shortcut-filters button[data-active="true"] {
-  transform: translateY(1px);
+  transform: translateY(1px) scale(1.05);
   background: linear-gradient(
     145deg,
-    var(--mpc-red),
-    oklch(from var(--mpc-red) calc(l - 0.1) c h)
-  );
-  color: var(--accent-foreground);
-  border-color: oklch(from var(--mpc-red) calc(l - 0.15) c h);
+    var(--accent),
+    oklch(from var(--accent) calc(l - 0.1) c h)
+  ) !important;
+  color: var(--accent-foreground) !important;
+  border-color: oklch(from var(--accent) calc(l - 0.15) c h) !important;
   box-shadow: 0 1px 3px oklch(0% 0 0 / 0.3), inset 0 2px 6px oklch(0% 0 0 / 0.2),
-    0 0 15px var(--mpc-red-glow);
+    0 0 15px var(--mpc-red-glow) !important;
   text-shadow: 0 0 4px oklch(from var(--mpc-red) calc(l + 0.2) c h / 0.5);
 }
 
@@ -298,14 +283,14 @@
 .shortcut-filters button[data-active="true"]::before {
   background: linear-gradient(
     145deg,
-    oklch(from var(--mpc-red) calc(l - 0.05) c h),
-    oklch(from var(--mpc-red) calc(l - 0.15) c h)
-  );
+    oklch(from var(--accent) calc(l - 0.05) c h),
+    oklch(from var(--accent) calc(l - 0.15) c h)
+  ) !important;
 }
 
 /* Dark theme MPC enhancements */
 .dark .shortcut-filters {
-  background: var(--mpc-dark-metal);
+  background: var(--muted);
   border-color: oklch(var(--mpc-bezel) / 0.8);
   box-shadow: inset 0 2px 4px oklch(100% 0 0 / 0.05),
     inset 0 -2px 4px oklch(0% 0 0 / 0.3), 0 4px 20px oklch(0% 0 0 / 0.4);
@@ -335,7 +320,7 @@
     inset 0 1px 0 oklch(100% 0 0 / 0.15), inset 0 -1px 0 oklch(0% 0 0 / 0.3);
 }
 
-/* Enhanced Tab Styling */
+/* Enhanced Tab Styling - ONLY ACTIVE TABS GET RED */
 [data-slot="tabs-trigger"] {
   background: linear-gradient(
     145deg,
@@ -354,12 +339,12 @@
 [data-slot="tabs-trigger"][data-state="active"] {
   background: linear-gradient(
     145deg,
-    var(--mpc-red),
-    oklch(from var(--mpc-red) calc(l - 0.08) c h)
-  );
-  color: var(--accent-foreground);
-  border-color: oklch(from var(--mpc-red) calc(l - 0.1) c h);
-  box-shadow: 0 0 12px var(--mpc-red-glow), inset 0 1px 0 oklch(100% 0 0 / 0.3);
+    var(--accent),
+    oklch(from var(--accent) calc(l - 0.08) c h)
+  ) !important;
+  color: var(--accent-foreground) !important;
+  border-color: oklch(from var(--accent) calc(l - 0.1) c h) !important;
+  box-shadow: 0 0 12px var(--mpc-red-glow), inset 0 1px 0 oklch(100% 0 0 / 0.3) !important;
   text-shadow: 0 0 4px oklch(from var(--mpc-red) calc(l + 0.2) c h / 0.5);
   transform: translateY(-2px);
 }
@@ -435,4 +420,92 @@
 svg.icon {
   width: calc(var(--spacing) * 8);
   height: calc(var(--spacing) * 8);
+}
+
+/* --- shortcut-filters persistent state styling --- */
+
+.shortcut-filters button {
+  position: relative;
+  background: linear-gradient(
+    145deg,
+    var(--secondary),
+    oklch(from var(--secondary) calc(l - 0.08) c h)
+  );
+  border: 2px solid var(--mpc-bezel);
+  border-radius: 6px;
+  box-shadow: 0 3px 6px oklch(0% 0 0 / 0.2), inset 0 1px 0 oklch(100% 0 0 / 0.2),
+    inset 0 -1px 0 oklch(0% 0 0 / 0.1);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.shortcut-filters button::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  background: linear-gradient(
+    145deg,
+    oklch(from var(--secondary) calc(l + 0.05) c h),
+    var(--secondary)
+  );
+  border-radius: 3px;
+  z-index: -1;
+  transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.shortcut-filters button[data-active="true"] {
+  background: linear-gradient(
+    145deg,
+    var(--accent),
+    oklch(from var(--accent) calc(l - 0.1) c h)
+  ) !important;
+  color: var(--accent-foreground) !important;
+  border-color: oklch(from var(--accent) calc(l - 0.15) c h) !important;
+  box-shadow: 0 0 0 2px var(--ring), 0 0 0 5px var(--background),
+    0 1px 3px oklch(0% 0 0 / 0.3), inset 0 2px 6px oklch(0% 0 0 / 0.2),
+    0 0 15px var(--mpc-red-glow) !important;
+  text-shadow: 0 0 4px oklch(from var(--mpc-red) calc(l + 0.2) c h / 0.5);
+  transform: scale(1.05);
+  outline: none;
+  z-index: 1;
+}
+
+.shortcut-filters button[data-active="true"]::before {
+  background: linear-gradient(
+    145deg,
+    oklch(from var(--accent) calc(l - 0.05) c h),
+    oklch(from var(--accent) calc(l - 0.15) c h)
+  ) !important;
+}
+
+.shortcut-filters button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--ring), 0 0 0 5px var(--background);
+  z-index: 1;
+}
+
+.shortcut-filters button[data-active="true"]:focus-visible {
+  /* Don't double-ring when focused and active */
+  box-shadow: 0 0 0 2px var(--ring), 0 0 0 5px var(--background),
+    0 1px 3px oklch(0% 0 0 / 0.3), inset 0 2px 6px oklch(0% 0 0 / 0.2),
+    0 0 15px var(--mpc-red-glow);
+}
+
+.shortcut-filters button:not([data-active="true"]):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px oklch(0% 0 0 / 0.25),
+    inset 0 1px 0 oklch(100% 0 0 / 0.3), inset 0 -1px 0 oklch(0% 0 0 / 0.1);
+}
+
+.shortcut-filters button:not([data-active="true"]):hover::before {
+  background: linear-gradient(
+    145deg,
+    oklch(from var(--secondary) calc(l + 0.1) c h),
+    oklch(from var(--secondary) calc(l + 0.02) c h)
+  );
 }

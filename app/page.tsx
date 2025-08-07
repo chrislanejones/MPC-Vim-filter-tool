@@ -10,9 +10,9 @@ export default function Home() {
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen bg-[var(--background)] p-4 md:p-8 transition-colors duration-300">
+    <div className="min-h-screen bg-background text-foreground p-4 md:p-8 transition-colors duration-300">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-[var(--foreground)]">
+        <h1 className="text-3xl font-bold text-foreground">
           Vim and NeoVim Shortcut Filter
         </h1>
         <ModeToggle />
@@ -20,18 +20,18 @@ export default function Home() {
 
       <div className="max-w-[80rem] mx-auto">
         <Tabs defaultValue="vim" className="w-full mb-6">
-          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 bg-[var(--muted)] border border-[var(--border)] rounded-t-md overflow-hidden">
+          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 bg-muted border border-border rounded-t-md overflow-hidden">
             <TabsTrigger
               value="vim"
               data-slot="tabs-trigger"
-              className="text-[var(--muted-foreground)]"
+              className="text-muted-foreground"
             >
               Vim
             </TabsTrigger>
             <TabsTrigger
               value="neovim"
               data-slot="tabs-trigger"
-              className="text-[var(--muted-foreground)]"
+              className="text-muted-foreground"
             >
               NeoVim
             </TabsTrigger>

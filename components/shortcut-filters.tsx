@@ -31,6 +31,39 @@ interface ShortcutFiltersProps {
   setActiveFilter: (filter: string | null) => void;
 }
 
+const SAMPLE_BASE_TR505 =
+  "https://oramics.github.io/sampled/DM/TR-505/samples/";
+const soundMap: Record<string, string> = {
+  cut: "tr505-kick.wav",
+  copy: "tr505-snare.wav",
+  paste: "tr505-hihat-closed.wav",
+  delete: "tr505-clap.wav",
+  move: "tr505-cowb-h.wav",
+  save: "tr505-rim.wav",
+  exit: "tr505-crash.wav",
+  search_replace: "tr505-hihat-closed.wav",
+  diff: "tr505-ride.wav",
+  tabs: "tr505-conga-l.wav",
+  marks_positions: "tr505-conga-h.wav",
+  visual_commands: "tr505-tom-m.wav",
+  macros: "tr505-tom-h.wav",
+  multi_file_search: "tr505-tom-l.wav",
+  insert_mode: "tr505-hihat-open.wav",
+  indent: "tr505-clap.wav",
+  move_screen_commands: "tr505-cowb-l.wav",
+  registers: "tr505-timbal.wav",
+  undo_redo: "tr505-conga-l.wav",
+  window_management: "tr505-crash.wav",
+};
+
+function playSample(name: string) {
+  const soundFile = soundMap[name];
+  if (soundFile) {
+    const audio = new Audio(SAMPLE_BASE_TR505 + soundFile);
+    audio.play();
+  }
+}
+
 export function ShortcutFilters({
   activeFilter,
   setActiveFilter,
@@ -65,29 +98,27 @@ export function ShortcutFilters({
     { name: "window_management", label: "Windows", icon: LayoutPanelLeft },
   ];
 
-  // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      // Check if we're in the shortcut filters area or if a button is focused
       const target = event.target as HTMLElement;
       const isInFilters =
         target.closest(".shortcut-filters") ||
         buttonRefs.current.includes(target as HTMLButtonElement);
 
-      if (isInFilters && focusedIndex >= 0) {
-        const currentIndex = focusedIndex;
+      if (isInFilters) {
+        const currentIndex = focusedIndex >= 0 ? focusedIndex : 0;
         let newIndex = currentIndex;
 
         switch (event.key) {
           case "Tab":
             event.preventDefault();
-            if (event.shiftKey) {
-              newIndex =
-                currentIndex <= 0 ? filters.length - 1 : currentIndex - 1;
-            } else {
-              newIndex =
-                currentIndex >= filters.length - 1 ? 0 : currentIndex + 1;
-            }
+            newIndex = event.shiftKey
+              ? currentIndex <= 0
+                ? filters.length - 1
+                : currentIndex - 1
+              : currentIndex >= filters.length - 1
+              ? 0
+              : currentIndex + 1;
             break;
           case "ArrowRight":
             event.preventDefault();
@@ -101,42 +132,47 @@ export function ShortcutFilters({
             break;
           case "ArrowDown":
             event.preventDefault();
-            // Move down by 4 (one row in 4-column grid) or to end if near bottom
             const cols =
               window.innerWidth >= 1024 ? 4 : window.innerWidth >= 640 ? 3 : 2;
-            newIndex =
-              currentIndex + cols >= filters.length
-                ? (currentIndex + cols) % filters.length
-                : currentIndex + cols;
+            newIndex = currentIndex + cols;
+            if (newIndex >= filters.length) newIndex = currentIndex % cols;
             break;
           case "ArrowUp":
             event.preventDefault();
-            // Move up by 4 (one row in 4-column grid) or wrap to end
             const colsUp =
               window.innerWidth >= 1024 ? 4 : window.innerWidth >= 640 ? 3 : 2;
-            newIndex =
-              currentIndex - colsUp < 0
-                ? filters.length + (currentIndex - colsUp)
-                : currentIndex - colsUp;
+            newIndex = currentIndex - colsUp;
+            if (newIndex < 0) {
+              const column = currentIndex % colsUp;
+              const lastRowStart =
+                Math.floor((filters.length - 1) / colsUp) * colsUp;
+              newIndex = lastRowStart + column;
+              if (newIndex >= filters.length) newIndex -= colsUp;
+            }
             break;
           case "Enter":
           case " ":
             event.preventDefault();
-            if (currentIndex >= 0 && currentIndex < filters.length) {
-              const filter = filters[currentIndex];
+            const filterIndex =
+              currentIndex >= 0 && currentIndex < filters.length
+                ? currentIndex
+                : 0;
+            if (filterIndex >= 0 && filterIndex < filters.length) {
+              const filter = filters[filterIndex];
               const isActive = activeFilter === filter.name;
               setActiveFilter(isActive ? null : filter.name);
+              setFocusedIndex(filterIndex);
+              playSample(filter.name);
             }
             break;
           case "Escape":
             event.preventDefault();
             setActiveFilter(null);
             setFocusedIndex(-1);
-            // Focus back to container
-            document.querySelector(".shortcut-filters")?.focus();
+            (
+              document.querySelector(".shortcut-filters") as HTMLElement | null
+            )?.focus();
             break;
-          default:
-            return;
         }
 
         if (
@@ -145,7 +181,10 @@ export function ShortcutFilters({
           newIndex < filters.length
         ) {
           setFocusedIndex(newIndex);
-          buttonRefs.current[newIndex]?.focus();
+          setTimeout(() => buttonRefs.current[newIndex]?.focus(), 0);
+        } else if (focusedIndex < 0 && newIndex >= 0) {
+          setFocusedIndex(newIndex);
+          setTimeout(() => buttonRefs.current[newIndex]?.focus(), 0);
         }
       }
     };
@@ -156,13 +195,27 @@ export function ShortcutFilters({
 
   return (
     <div
-      className="shortcut-filters grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 p-4 rounded-lg bg-[var(--muted)] shadow-inner transition-colors duration-300"
-      tabIndex={0}
+      className="shortcut-filters grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 p-4 rounded-lg bg-muted shadow-inner transition-colors duration-300"
+      role="group"
+      aria-label="Filter shortcuts by category"
+      tabIndex={focusedIndex < 0 ? 0 : -1}
+      onFocus={() => {
+        if (focusedIndex < 0) {
+          setFocusedIndex(0);
+          setTimeout(() => buttonRefs.current[0]?.focus(), 0);
+        }
+      }}
+      onKeyDown={(e) => {
+        if (e.key === "Tab" && focusedIndex < 0) {
+          e.preventDefault();
+          setFocusedIndex(0);
+          setTimeout(() => buttonRefs.current[0]?.focus(), 0);
+        }
+      }}
       onClick={() => {
-        // Initiate keyboard navigation when container is clicked
         if (focusedIndex === -1) {
           setFocusedIndex(0);
-          buttonRefs.current[0]?.focus();
+          setTimeout(() => buttonRefs.current[0]?.focus(), 0);
         }
       }}
     >
@@ -180,22 +233,21 @@ export function ShortcutFilters({
               const isCurrentlyActive = activeFilter === filter.name;
               setActiveFilter(isCurrentlyActive ? null : filter.name);
               setFocusedIndex(index);
+              playSample(filter.name);
             }}
             onFocus={() => setFocusedIndex(index)}
             onBlur={() => {
-              // Only clear focus if we're not navigating to another button
               setTimeout(() => {
                 if (!document.activeElement?.closest(".shortcut-filters")) {
                   setFocusedIndex(-1);
                 }
               }, 0);
             }}
+            tabIndex={focusedIndex === index ? 0 : -1}
+            data-active={activeFilter === filter.name ? "true" : undefined}
             className={cn(
               "flex flex-col items-center justify-start w-full h-32 p-4 rounded-lg transition-all duration-200",
-              "bg-[var(--secondary)] text-[var(--secondary-foreground)] hover:bg-[var(--secondary)]/90",
-              isActive &&
-                "bg-red-200 text-red-800 hover:bg-red-300 shadow-lg scale-105 dark:bg-red-900 dark:text-white dark:hover:bg-red-800",
-              isFocused && "ring-2 ring-[var(--ring)] ring-offset-2"
+              "bg-secondary text-secondary-foreground hover:bg-secondary/90"
             )}
             style={{
               display: "flex",
@@ -204,12 +256,7 @@ export function ShortcutFilters({
               justifyContent: "flex-start",
             }}
           >
-            <filter.icon
-              className={cn(
-                "size-8 mb-2 flex-shrink-0 transition-all duration-200",
-                isActive && "text-orange-600 dark:text-orange-300"
-              )}
-            />
+            <filter.icon className="size-8 mb-2 flex-shrink-0 transition-all duration-200" />
             <div
               className="text-sm font-semibold text-center leading-tight px-2 flex-1 flex items-center justify-center w-full"
               style={{
@@ -226,7 +273,12 @@ export function ShortcutFilters({
             >
               {filter.label}
             </div>
-            <span className="sr-only">Filter by {filter.label}</span>
+            <span className="sr-only">
+              Filter by {filter.label}.{" "}
+              {isActive
+                ? "Currently active filter."
+                : "Press Enter or Space to activate."}
+            </span>
           </Button>
         );
       })}

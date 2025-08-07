@@ -1607,19 +1607,19 @@ export function ShortcutList({
   );
 
   return (
-    <div className="grid gap-4 p-4 rounded-lg bg-[var(--muted)] shadow-inner max-h-[calc(100vh-150px)] overflow-y-auto transition-colors duration-300">
+    <div className="grid gap-4 p-4 rounded-lg bg-muted shadow-inner max-h-[calc(100vh-150px)] overflow-y-auto transition-colors duration-300">
       {filteredShortcuts.length === 0 ? (
-        <p className="text-center text-[var(--muted-foreground)] text-lg py-8">
+        <p className="text-center text-muted-foreground text-lg py-8">
           No shortcuts found for this filter.
         </p>
       ) : (
         filteredShortcuts.map((shortcut, index) => (
           <Card
             key={index}
-            className="bg-[var(--card)] shadow-sm hover:shadow-md transition-shadow duration-300"
+            className="bg-card shadow-sm hover:shadow-md transition-shadow duration-300"
           >
             <CardHeader className="pb-2">
-              <CardTitle className="text-xl font-semibold text-[var(--card-foreground)] ">
+              <CardTitle className="text-xl font-semibold text-card-foreground">
                 {shortcut.description}
               </CardTitle>
             </CardHeader>

@@ -1,156 +1,124 @@
 # 🎛️ Vim & NeoVim Shortcut Filter
 
-A sleek, MPC-inspired interface for browsing and filtering Vim and NeoVim keyboard shortcuts. Built with Next.js, React, and Tailwind CSS.
+A sleek, MPC-inspired interface for browsing and filtering Vim and NeoVim keyboard shortcuts. Built with **Next.js**, **React**, and **Tailwind CSS**, featuring **keyboard accessibility**, **dark/light themes**, and **retro drum-machine sounds** powered by the TR-505 sample kit.
 
 ![MPC Theme](https://img.shields.io/badge/Theme-MPC_Inspired-orange)
 ![Next.js](https://img.shields.io/badge/Next.js-14+-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5+-blue)
 ![Tailwind](https://img.shields.io/badge/Tailwind-3+-cyan)
 
+---
+
 ## ✨ Features
 
-- **🎹 MPC-Inspired Design**: Professional beat machine aesthetic with orange accents
-- **🔍 Smart Filtering**: 20 different categories to organize shortcuts
-- **⌨️ Keyboard Navigation**: Full accessibility with arrow keys, tab, and enter
-- **🌓 Dark/Light Mode**: Seamless theme switching with system preference support
-- **📱 Responsive Layout**: Works perfectly on desktop, tablet, and mobile
-- **🎯 Dual Editor Support**: Separate shortcuts for Vim and NeoVim
-- **⚡ Fast Search**: Instant filtering with no loading delays
+- 🎹 **MPC-Inspired UI** with 20 drum pad-style filters
+- 🎵 **TR-505 Drum Samples** for audio feedback on filter toggle
+- 🔍 **Smart Filtering**: Toggleable shortcut categories
+- ⌨️ **Full Keyboard Support**: Tab, arrows, space/enter, escape
+- 🌗 **Theme Toggle**: Light & dark modes via `next-themes`
+- 📱 **Responsive Layout**: Built for desktop + mobile
+- ⚡ **Instant UX**: No loading delays or rerenders
+
+---
 
 ## 🚀 Quick Start
 
 ```bash
-# Clone the repository
+# Clone and install
 git clone https://github.com/yourusername/vim-shortcut-filter.git
 cd vim-shortcut-filter
-
-# Install dependencies
-npm install
-# or
-yarn install
-# or
 pnpm install
 
-# Run development server
-npm run dev
-# or
-yarn dev
-# or
+# Start dev server
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the application.
-
-## 🎯 Filter Categories
-
-| Category              | Description              | Icon |
-| --------------------- | ------------------------ | ---- |
-| **Exit**              | Quit commands            | 🚪   |
-| **Cut**               | Delete/cut operations    | ✂️   |
-| **Copy**              | Yank operations          | 📋   |
-| **Paste**             | Put operations           | 📥   |
-| **Move**              | Cursor movement          | ➡️   |
-| **Delete**            | Delete commands          | 🗑️   |
-| **Save**              | Write operations         | 💾   |
-| **Search/Replace**    | Find and replace         | 🔍   |
-| **Diff**              | Diff operations          | ⚖️   |
-| **Tabs**              | Tab management           | 📁   |
-| **Marks/Positions**   | Bookmarks and jumps      | 🔖   |
-| **Visual Commands**   | Visual mode operations   | 👁️   |
-| **Macros**            | Macro recording/playback | 🔄   |
-| **Multi-File Search** | Project-wide search      | 📄   |
-| **Insert Mode**       | Text insertion           | ⌨️   |
-| **Indent**            | Indentation control      | 📐   |
-| **Move Screen**       | Viewport control         | 🖥️   |
-| **Registers**         | Register operations      | 🗃️   |
-| **Undo/Redo**         | History navigation       | ⏪   |
-| **Windows**           | Window management        | 🪟   |
-
-## 🎮 Keyboard Controls
-
-- **Arrow Keys**: Navigate between filter buttons
-- **Tab/Shift+Tab**: Cycle through filters
-- **Enter/Space**: Toggle filter selection
-- **Escape**: Clear active filter
-
-## 🎨 Theme Colors
-
-### Light Theme (Classic MPC)
-
-- **Background**: Cool silver-gray
-- **Accent**: MPC Orange (`#D97706`)
-- **Text**: Deep charcoal
-
-### Dark Theme (Modern MPC)
-
-- **Background**: Deep black
-- **Accent**: Bright orange (`#F59E0B`)
-- **Text**: Warm white
-
-## 🏗️ Project Structure
-
-```
-├── app/
-│   ├── globals.css          # MPC-themed styles
-│   ├── layout.tsx          # Root layout
-│   └── page.tsx            # Main page
-├── components/
-│   ├── ui/                 # shadcn/ui components
-│   ├── shortcut-filters.tsx # Filter button grid
-│   ├── shortcut-list.tsx   # Shortcuts display
-│   └── mode-toggle.tsx     # Theme switcher
-└── lib/
-    └── utils.ts            # Utility functions
-```
-
-## 🛠️ Tech Stack
-
-- **Framework**: Next.js 14+ with App Router
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS with custom MPC theme
-- **Icons**: Lucide React
-- **UI Components**: shadcn/ui
-- **Theme**: next-themes
-
-## 📝 Shortcuts Database
-
-The application includes **200+ shortcuts** covering:
-
-### Vim Shortcuts
-
-- Basic movement and editing
-- Advanced text objects
-- Window and tab management
-- Search and replace operations
-
-### NeoVim Enhancements
-
-- LSP commands (`gd` for go to definition)
-- Telescope integration
-- Tree-sitter aware indentation
-- Enhanced clipboard support
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Inspired by the iconic Akai MPC design
-- Built with [shadcn/ui](https://ui.shadcn.com/)
-- Icons from [Lucide](https://lucide.dev/)
-- Vim and NeoVim communities for the comprehensive shortcut knowledge
+Then visit: [http://localhost:3000](http://localhost:3000)
 
 ---
 
-**Made with ❤️ for the Vim community**
+## 🎮 Keyboard Controls
+
+| Key             | Action                                |
+| --------------- | ------------------------------------- |
+| Arrow Keys      | Navigate between filters              |
+| Tab / Shift+Tab | Move focus forward/backward           |
+| Enter / Space   | Toggle the active filter + play sound |
+| Escape          | Clear selection and reset focus       |
+
+---
+
+## 🎨 Visual & Audio Feedback
+
+- **Selected Filter**: Orange border (`ring`) + pressed styling
+- **Focused Filter**: Subtle highlight ring
+- **Sound**: TR-505 `.wav` sound triggered on filter activation
+
+Example:
+
+| Filter  | Sound                    |
+| ------- | ------------------------ |
+| Cut     | `tr505-kick.wav`         |
+| Paste   | `tr505-hihat-closed.wav` |
+| Delete  | `tr505-clap.wav`         |
+| Macros  | `tr505-tom-h.wav`        |
+| Windows | `tr505-crash.wav`        |
+
+All mapped in [`shortcut-filters.tsx`](./components/shortcut-filters.tsx)
+
+---
+
+## 📁 Project Structure
+
+```
+├── app/
+│   ├── globals.css           # Custom MPC theme
+│   ├── layout.tsx            # Layout shell
+│   └── page.tsx              # Main page
+├── components/
+│   ├── shortcut-filters.tsx  # Grid of buttons (pads)
+│   ├── shortcut-list.tsx     # Shortcut display list
+│   ├── mode-toggle.tsx       # Light/dark switch
+│   └── ui/                   # shadcn/ui components
+└── lib/
+    └── utils.ts              # Utility functions
+```
+
+---
+
+## 🔧 Tech Stack
+
+- ✅ **Next.js 14+** with App Router
+- ✅ **TypeScript 5+**
+- ✅ **Tailwind CSS 3+**
+- ✅ **Lucide React** for icons
+- ✅ **shadcn/ui** component library
+- ✅ **TR-505** drum samples via [oramics.github.io](https://oramics.github.io/sampled/DM/TR-505/)
+
+---
+
+## 📚 Shortcuts Covered
+
+### Vim
+
+- Motion (`h`, `j`, `k`, `l`)
+- Editing (`d`, `c`, `y`, `p`)
+- Windows, Registers, Visual Mode
+
+### NeoVim
+
+- LSP support (e.g. `gd`, `gr`)
+- Plugins like Telescope, Tree-sitter
+
+---
+
+## 🙏 Acknowledgments
+
+- 🎛️ Inspired by the Akai MPC
+- 🥁 TR-505 sounds from [oramics.github.io](https://oramics.github.io/sampled/DM/TR-505/)
+- 🎨 UI framework by [shadcn/ui](https://ui.shadcn.com)
+- ⚡ Icons from [Lucide](https://lucide.dev)
+
+---
+
+**Made with ❤️ for the Vim & NeoVim community**

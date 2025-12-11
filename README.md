@@ -1,4 +1,6 @@
-# 🎛️ Vim & NeoVim Shortcut Filter
+![MPC Vim Filter Tool](/public/MPC-Vim-Filter-Tool.webp)
+
+# Vim & NeoVim Shortcut Filter
 
 A sleek, MPC-inspired interface for browsing and filtering Vim and NeoVim keyboard shortcuts. Built with **Next.js**, **React**, and **Tailwind CSS**, featuring **keyboard accessibility**, **dark/light themes**, and **retro drum-machine sounds** powered by the TR-505 sample kit.
 

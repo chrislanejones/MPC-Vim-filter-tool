@@ -18,7 +18,7 @@ export default function Home() {
         <ModeToggle />
       </div>
 
-      <div className="max-w-[80rem] mx-auto">
+      <div className="max-w-8xl mx-auto">
         <Tabs defaultValue="vim" className="w-full mb-6">
           <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 bg-muted border border-border rounded-t-md overflow-hidden">
             <TabsTrigger

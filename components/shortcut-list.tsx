@@ -216,6 +216,12 @@ const shortcuts = [
     editor: "vim",
   },
   {
+    command: "%d",
+    description: "Delete all lines in the file",
+    category: "delete",
+    editor: "vim",
+  },
+  {
     command: "C",
     description: "Delete to end of line and enter insert mode",
     category: "delete",
@@ -1607,7 +1613,7 @@ export function ShortcutList({
   );
 
   return (
-    <div className="grid gap-4 p-4 rounded-lg bg-muted shadow-inner max-h-[calc(100vh-150px)] overflow-y-auto transition-colors duration-300">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg bg-muted shadow-inner max-h-[calc(100vh-150px)] overflow-y-auto transition-colors duration-300">
       {filteredShortcuts.length === 0 ? (
         <p className="text-center text-muted-foreground text-lg py-8">
           No shortcuts found for this filter.

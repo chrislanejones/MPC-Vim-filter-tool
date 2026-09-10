@@ -5,9 +5,9 @@
 A sleek, MPC-inspired interface for browsing and filtering Vim and NeoVim keyboard shortcuts. Built with **Next.js**, **React**, and **Tailwind CSS**, featuring **keyboard accessibility**, **dark/light themes**, and **retro drum-machine sounds** powered by the TR-505 sample kit.
 
 ![MPC Theme](https://img.shields.io/badge/Theme-MPC_Inspired-orange)
-![Next.js](https://img.shields.io/badge/Next.js-14+-black)
+![Next.js](https://img.shields.io/badge/Next.js-16+-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5+-blue)
-![Tailwind](https://img.shields.io/badge/Tailwind-3+-cyan)
+![Tailwind](https://img.shields.io/badge/Tailwind-4+-cyan)
 
 ---
 
@@ -27,8 +27,8 @@ A sleek, MPC-inspired interface for browsing and filtering Vim and NeoVim keyboa
 
 ```bash
 # Clone and install
-git clone https://github.com/yourusername/vim-shortcut-filter.git
-cd vim-shortcut-filter
+git clone https://github.com/chrislanejones/MPC-Vim-filter-tool.git
+cd MPC-Vim-filter-tool
 pnpm install
 
 # Start dev server
@@ -74,25 +74,28 @@ All mapped in [`shortcut-filters.tsx`](./components/shortcut-filters.tsx)
 
 ```
 ├── app/
-│   ├── globals.css           # Custom MPC theme
-│   ├── layout.tsx            # Layout shell
-│   └── page.tsx              # Main page
+│   ├── layout.tsx             # Layout shell
+│   └── page.tsx               # Main page
 ├── components/
-│   ├── shortcut-filters.tsx  # Grid of buttons (pads)
-│   ├── shortcut-list.tsx     # Shortcut display list
-│   ├── mode-toggle.tsx       # Light/dark switch
-│   └── ui/                   # shadcn/ui components
-└── lib/
-    └── utils.ts              # Utility functions
+│   ├── shortcut-filters.tsx   # Grid of buttons (pads)
+│   ├── shortcut-list.tsx      # Shortcut display list
+│   ├── mode-toggle.tsx        # Light/dark switch
+│   ├── theme-provider.tsx     # next-themes provider
+│   └── ui/                    # shadcn/ui components
+├── hooks/                     # Shared React hooks
+├── lib/
+│   └── utils.ts               # Utility functions
+└── styles/
+    └── globals.css            # Custom MPC theme
 ```
 
 ---
 
 ## 🔧 Tech Stack
 
-- ✅ **Next.js 14+** with App Router
+- ✅ **Next.js 16+** with App Router
 - ✅ **TypeScript 5+**
-- ✅ **Tailwind CSS 3+**
+- ✅ **Tailwind CSS 4+**
 - ✅ **Lucide React** for icons
 - ✅ **shadcn/ui** component library
 - ✅ **TR-505** drum samples via [oramics.github.io](https://oramics.github.io/sampled/DM/TR-505/)
